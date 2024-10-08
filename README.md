@@ -6,3 +6,20 @@ To install, copy and paste the following code
 	curl -L https://github.com/AresRebatto/ymir_compiler/setup/install.sh | bash
 ```
 ## Uninstall
+## How it works
+The compiler follows the steps of lexing and parsing user-supplied source code and then converting it to native Rust using macros
+## The language that is defined
+The defined language is very simple that is structured with the following trivial Tokens to structure a language to write basic 
+algorithms(copy of TokenKind enum):
+- `Int(i32)`
+- `Equal`(=)
+- `Minus`
+- `Plus`
+- `Semicolon`(;)
+- `Define` To define constants as in C
+- `FuncReturnType(String)`
+- `FuncName(String)`
+- `LeftBracket`
+- `RightBracket`
+- `LeftParentheses`
+- `RightParentheses`

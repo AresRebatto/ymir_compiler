@@ -1,14 +1,18 @@
-pub enum TokenKind<T>{
+pub enum TokenKind{
 	Int(i32),
 	Equal,
 	Minus,
 	Plus,
 	Semicolon,
-	Preprocessor,
-	Include,
 	Define,
-	FuncReturnType(T)
+	FuncReturnType(String),
+	FuncName(String),
+	LeftBracket,
+	RightBracket,
+	LeftParentheses,
+	RightParentheses
 }
+
 
 pub struct Token{
 	token: TokenKind,
@@ -19,11 +23,13 @@ impl Token{
 	pub fn new(t: TokenKind, nt: TokenKind)-> Self{
 		Self{
 			token: t,
-			next_token: tn 
+			next_token: nt 
 		}
 	}
 }
 
 pub fn get_tokens(source_code: String)-> Vec<Token>{
 	let mut res: Vec<Token> = vec![];
+
+	return res;
 }
