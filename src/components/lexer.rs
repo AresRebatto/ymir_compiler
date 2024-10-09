@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub enum TokenKind{
 	Int(i32),
 	Equal,
@@ -6,22 +7,21 @@ pub enum TokenKind{
 	Semicolon,
 	Define,
 	Type(String), //Solo int
-	FuncName(String),
 	LeftBracket,
 	RightBracket,
 	LeftParentheses,
 	RightParentheses,
-	Identifier
+	Identifier(String)
 }
 
-
+#[derive(Clone)]
 pub struct Token{
 	pub token: TokenKind,
-	pub next_token: TokenKind 	
+	pub next_token: Option<TokenKind> 	
 }
 
 impl Token{
-	pub fn new(t: TokenKind, nt: TokenKind)-> Self{
+	pub fn new(t: TokenKind, nt: Option<TokenKind>)-> Self{
 		Self{
 			token: t,
 			next_token: nt 
@@ -30,13 +30,38 @@ impl Token{
 }
 
 pub fn get_tokens(source_code: String)-> Vec<Token>{
-	let res: Vec<Token> = vec![];
+	let mut res: Vec<Token> = vec![];
+	let mut counter: usize = 0;
 	for _c in source_code.split(' ').into_iter(){
-		// match _c{
-		// 	"int"=> res.push(TokenKind::Type(String::from("int"))), 
-
-
-		// }
+		if counter == 0
+		{
+			res.push(Token::new(get_token(_c).unwrap(), None));
+		}else{
+			res.push(Token::new(get_token(_c).unwrap(), None));
+			res[counter-1].next_token = Some(res[counter].clone().token);
+		}
+		counter+=1;
 	}
 	return res;
+}
+
+fn get_token(word: &str)-> Option<TokenKind>{
+	match word{
+		"=" => Some(TokenKind::Equal),
+		"-" => Some(TokenKind::Minus),
+		";" => Some(TokenKind::Semicolon),
+		"define" => Some(TokenKind::Define),
+		"{" => Some(TokenKind::LeftBracket),
+		"}" => Some(TokenKind::RightBracket),
+		"(" => Some(TokenKind::LeftParentheses),
+		")" => Some(TokenKind::RightParentheses),
+		"int" => Some(TokenKind::Type(String::from("int"))),
+		_ => {
+			if let Ok(i) = word.parse::<i32>() {
+                Some(TokenKind::Int(i))
+            } else {
+                Some(TokenKind::Identifier(String::from(word)))
+            }
+		}
+	}
 }
