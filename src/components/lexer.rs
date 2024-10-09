@@ -5,18 +5,19 @@ pub enum TokenKind{
 	Plus,
 	Semicolon,
 	Define,
-	FuncReturnType(String),
+	Type(String), //Solo int
 	FuncName(String),
 	LeftBracket,
 	RightBracket,
 	LeftParentheses,
-	RightParentheses
+	RightParentheses,
+	Identifier
 }
 
 
 pub struct Token{
-	token: TokenKind,
-	next_token: TokenKind 	
+	pub token: TokenKind,
+	pub next_token: TokenKind 	
 }
 
 impl Token{
@@ -29,7 +30,13 @@ impl Token{
 }
 
 pub fn get_tokens(source_code: String)-> Vec<Token>{
-	let mut res: Vec<Token> = vec![];
+	let res: Vec<Token> = vec![];
+	for _c in source_code.split(' ').into_iter(){
+		// match _c{
+		// 	"int"=> res.push(TokenKind::Type(String::from("int"))), 
 
+
+		// }
+	}
 	return res;
 }

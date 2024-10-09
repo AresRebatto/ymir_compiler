@@ -7,7 +7,10 @@ To install, copy and paste the following code
 ```
 ## Uninstall
 ## How it works
-The compiler follows the steps of lexing and parsing user-supplied source code and then converting it to native Rust using macros
+The compiler follows the steps of lexing and parsing user-supplied source code and then converting it to native Rust using macros.
+
+The grammar is defined in `src/components/grammar.yaml` with
+BNF notation
 ## The language that is defined
 The defined language is very simple that is structured with the following trivial Tokens to structure a language to write basic 
 algorithms(copy of TokenKind enum):
@@ -23,3 +26,4 @@ algorithms(copy of TokenKind enum):
 - `RightBracket`
 - `LeftParentheses`
 - `RightParentheses`
+
