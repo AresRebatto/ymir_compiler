@@ -1,5 +1,9 @@
 use super::lexer::*;
-use std::fs;
+use super::grammar::Grammar;
+use serde::Deserialize;
+use std::{fs::File, io::Read};
+
+
 pub struct ASTNode{
     pub token: Token,
     pub linked_token: Vec<Token>
@@ -22,10 +26,15 @@ pub fn get_ast() -> Vec<ASTNode>{
     return  abs_tree;
 }
 
-fn get_language_grammar_rule(token: &TokenKind) -> Result<(), Box<dyn std::error::Error>>{
+pub fn get_language_grammar_rule(token: &TokenKind) -> Result<(), Box<dyn std::error::Error>>{
 
-	let file_contents = fs::read_to_string("grammar.yaml")?;
-	    println!("info.txt content =\n{file_contents}");
-	    
+	let mut file = File::open("src/components/grammar.yaml")?;
+	let mut file_content = String::new();
+
+	file.read_to_string(&mut file_content).expect("Failed to read file.");
+
+	let grammar: Grammar = serde_yaml::from_str(&file_content).expect("Failed to parse YAML.");
+
+	println!("{:?}", grammar);	    
 	return Ok(()); //Dovra' ritornare l'insieme dei Token ammessi
 }

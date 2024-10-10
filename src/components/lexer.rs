@@ -1,4 +1,4 @@
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TokenKind{
 	Int(i32),
 	Equal,
@@ -14,7 +14,7 @@ pub enum TokenKind{
 	Identifier(String)
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Token{
 	pub token: TokenKind,
 	pub next_token: Option<TokenKind> 	
