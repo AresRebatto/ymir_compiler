@@ -1,0 +1,8 @@
+program: " \ instruction \ "
+
+instruction: " \ declaration | assignment \ "
+
+declaration: " \ type \ identifier \ '=' \ (value | identifier | expression) \ "
+assignment: " \ identifier \ '=' \ (value | identifier | expression) \ "
+
+expression: " \ (value | identifier) \ ('+' | '-') \ (value | identifier) \ "
