@@ -1,4 +1,4 @@
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum TokenKind{
 	Int(i32),
 	Equal,
@@ -49,6 +49,7 @@ fn get_token(word: &str)-> Option<TokenKind>{
 	match word{
 		"=" => Some(TokenKind::Equal),
 		"-" => Some(TokenKind::Minus),
+		"+" => Some(TokenKind::Plus),
 		";" => Some(TokenKind::Semicolon),
 		"define" => Some(TokenKind::Define),
 		"{" => Some(TokenKind::LeftBracket),
