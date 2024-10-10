@@ -17,12 +17,12 @@ impl ASTNode{
 pub fn get_ast() -> Vec<ASTNode>{
     let mut abs_tree: Vec<ASTNode> = vec![];
 	
-	get_language_grammar_rule(TokenKind::Plus);
+	get_language_grammar_rule(&TokenKind::Plus);
 
     return  abs_tree;
 }
 
-fn get_language_grammar_rule(token: TokenKind) -> Result<(), Box<dyn std::error::Error>>{
+fn get_language_grammar_rule(token: &TokenKind) -> Result<(), Box<dyn std::error::Error>>{
 
 	let file_contents = fs::read_to_string("grammar.yaml")?;
 	    println!("info.txt content =\n{file_contents}");
