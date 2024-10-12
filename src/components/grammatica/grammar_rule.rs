@@ -1,4 +1,4 @@
-use super::{lexer::*, parser::*};
+use crate::components::{lexer::*, parser::*};
 
 //Serve per contenere le singole regole della
 //grammatica del linguaggio

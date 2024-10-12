@@ -1,5 +1,5 @@
 use super::lexer::*;
-use super::grammar::Grammar;
+use super::grammatica::grammar::Grammar;
 use serde::Deserialize;
 use std::{fs::File, io::Read};
 
