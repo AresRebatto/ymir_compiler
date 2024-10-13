@@ -20,13 +20,31 @@ impl GrammarRule{
     //Quando le regole vengono scaricate, sono in
     //un formato stringa. Questa funzione le deserializza
     pub fn deserialize(&self){
+
         let binding = self.unwrap_raw_rules();
         let rules = binding.as_str()
                            .split('/');
-                        
+        
+        let mut new_rule: GrammarRule;
+
         for rule in rules{
+            //Verifica se per quella regola e' previsto la possibilita'
+            //di avere token diversi e agisce di conseguenza
             if rule.to_string().contains('|'){
 
+                let mut tokens: Vec<TokenKind> = vec![];
+                new_rule = GrammarRule::Worked(GrammarRuleSection::MultipleTokens(vec![]));
+                for option in rule.to_string().split("|"){
+
+                    match option{
+                        "value" => tokens.push(TokenKind::Int(0)),
+                        "identifier" => tokens.push(TokenKind::Identifier(String::new())),
+                        "expression" => {
+                            //Da scomporre l'expression
+                        },
+                        _ => panic!("Rule not supported")
+                    }
+                }
             }else{
 
             }
