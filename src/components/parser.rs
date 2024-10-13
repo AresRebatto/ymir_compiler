@@ -1,5 +1,5 @@
 use super::lexer::*;
-use super::grammatica::grammar::Grammar;
+use super::grammatica::grammar::*;
 use serde::Deserialize;
 use std::{fs::File, io::Read};
 
@@ -28,13 +28,6 @@ pub fn get_ast() -> Vec<ASTNode>{
 
 pub fn get_language_grammar_rule(token: &TokenKind) -> Result<(), Box<dyn std::error::Error>>{
 
-	let mut file = File::open("src/components/grammar.yaml")?;
-	let mut file_content = String::new();
-
-	file.read_to_string(&mut file_content).expect("Failed to read file.");
-
-	let grammar: Grammar = serde_yaml::from_str(&file_content).expect("Failed to parse YAML.");
-
-	println!("{:?}", grammar);	    
+	    
 	return Ok(()); //Dovra' ritornare l'insieme dei Token ammessi
 }

@@ -1,26 +1,28 @@
-use serde::Deserialize;
+use crate::components::lexer::*;
+						//Type(String), Identifier(String), Equal
+pub struct Declaration(TokenKind, TokenKind, TokenKind, Value);
 
-use crate::TokenKind;
+					//Identifier(String), Equal
+pub struct Assignment(TokenKind, TokenKind, Value);
 
-#[derive(Deserialize, Debug)]
-pub struct Grammar{
-	pub program: Vec<RuleFormat>,
-	pub instruction: Vec<RuleFormat>,
-	pub declaration: Vec<RuleFormat>,
-	pub assignment: Vec<RuleFormat>,
-	pub expression: Vec<RuleFormat> 
+pub enum Value{
+	Integer(TokenKind), //Int(i32)
+	Id(TokenKind), //Identifier(String)
+	Exp(Box<Expression>)
 }
 
-
-
-impl Grammar{
-	// pub fn new() -> Self{
-	// }
+pub struct Expression{
+	op1: Box<Value>,
+	operator: Operator,
+	op2: Box<Value>
 }
 
-pub enum RuleFormat{
-	SingleToken(TokenKind),
-	PultipleTokens(Vec<TokenKind>),
-	GrammarRule(Grammar)
+pub enum Operator{
+	Add(TokenKind), //Plus
+	Sub(TokenKind) //Minus
+}
+
+pub fn declaration(_type: TokenKind, id: TokenKind, value: Value)-> Declaration{
+	Declaration(_type, id, TokenKind::Equal, value)
 }
 
