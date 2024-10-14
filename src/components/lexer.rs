@@ -5,12 +5,7 @@ pub enum TokenKind{
 	Minus,
 	Plus,
 	Semicolon,
-	Define,
 	Type(String), //Solo int
-	LeftBracket,
-	RightBracket,
-	LeftParentheses,
-	RightParentheses,
 	Identifier(String)
 }
 
@@ -51,11 +46,6 @@ fn get_token(word: &str)-> Option<TokenKind>{
 		"-" => Some(TokenKind::Minus),
 		"+" => Some(TokenKind::Plus),
 		";" => Some(TokenKind::Semicolon),
-		"define" => Some(TokenKind::Define),
-		"{" => Some(TokenKind::LeftBracket),
-		"}" => Some(TokenKind::RightBracket),
-		"(" => Some(TokenKind::LeftParentheses),
-		")" => Some(TokenKind::RightParentheses),
 		"int" => Some(TokenKind::Type(String::from("int"))),
 		_ => {
 			if let Ok(i) = word.parse::<i32>() {

@@ -31,8 +31,14 @@ pub fn get_ast(read_tokens: Vec<Token>) -> Vec<ASTNode>{
     return  abs_tree;
 }
 
-pub fn get_language_rule(token: &TokenKind) -> Result<Vec<TokenKind>, Box<dyn std::error::Error>>{
-
-	    
-	return Ok(vec![]); //Dovra' ritornare l'insieme dei Token ammessi
+pub fn get_language_rule(token: &TokenKind) ->Result<Vec<TokenKind>, Box<dyn std::error::Error>>{
+	match token{
+		TokenKind::Int(i) => Ok(vec![TokenKind::Identifier("".to_string()), TokenKind::Minus, TokenKind::Plus]),
+		TokenKind::Equal => Ok(vec![TokenKind::Identifier("".to_string()), TokenKind::Int(0)]),
+		TokenKind::Minus => Ok(vec![TokenKind::Int(0), TokenKind::Identifier("".to_string())]),
+		TokenKind::Plus => Ok(vec![TokenKind::Int(0), TokenKind::Identifier("".to_string())]),
+		TokenKind::Semicolon => Ok(vec![]),
+		TokenKind::Type(i) => Ok(vec![TokenKind::Identifier("".to_string())]),
+		TokenKind::Identifier(i) => Ok(vec![TokenKind::Minus, TokenKind::Plus, TokenKind::Equal]) ,
+	}
 }
