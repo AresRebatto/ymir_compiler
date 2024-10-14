@@ -6,11 +6,11 @@ use std::{fs::File, io::Read};
 
 pub struct ASTNode{
     pub token: Token,
-    pub linked_token: Vec<Token>
+    pub linked_token: Vec<TokenKind>
 }
 
 impl ASTNode{
-    pub fn new(tk: Token, ltk: Vec<Token>)-> Self{
+    pub fn new(tk: Token, ltk: Vec<TokenKind>)-> Self{
         Self{
             token: tk,
             linked_token: ltk
@@ -18,16 +18,21 @@ impl ASTNode{
     }
 }
 
-pub fn get_ast() -> Vec<ASTNode>{
+pub fn get_ast(read_tokens: Vec<Token>) -> Vec<ASTNode>{
     let mut abs_tree: Vec<ASTNode> = vec![];
 	
-	get_language_grammar_rule(&TokenKind::Plus);
+	for read_token in read_tokens{
+		abs_tree.push(ASTNode::new(
+					  read_token.clone(),
+					  get_language_rule(&read_token.token).unwrap())
+					  );
+	}
 
     return  abs_tree;
 }
 
-pub fn get_language_grammar_rule(token: &TokenKind) -> Result<(), Box<dyn std::error::Error>>{
+pub fn get_language_rule(token: &TokenKind) -> Result<Vec<TokenKind>, Box<dyn std::error::Error>>{
 
 	    
-	return Ok(()); //Dovra' ritornare l'insieme dei Token ammessi
+	return Ok(vec![]); //Dovra' ritornare l'insieme dei Token ammessi
 }

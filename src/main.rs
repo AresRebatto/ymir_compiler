@@ -13,11 +13,11 @@ fn main() {
     if args.len() == 2 {
         for file_path in args.iter().skip(1) {
 			
-        	parser::get_ast();
-            let tokens = get_tokens(String::from("Ciao a tutti quanti int ;"));
-            for t in tokens{
-                println!("{:?}", t.token);
-            }
+        	// parser::get_ast();
+            // let tokens = get_tokens(String::from("Ciao a tutti quanti int ;"));
+            // for t in tokens{
+                // println!("{:?}", t.token);
+            // }
         }
     }else{
         println!("Numero di parametri non valido");
