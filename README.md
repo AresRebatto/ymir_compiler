@@ -19,11 +19,6 @@ algorithms(copy of TokenKind enum):
 - `Minus`
 - `Plus`
 - `Semicolon`(;)
-- `Define` To define constants as in C
-- `FuncReturnType(String)`
-- `FuncName(String)`
-- `LeftBracket`
-- `RightBracket`
-- `LeftParentheses`
-- `RightParentheses`
+- `Type(String)`
+- `Identifier(String)`: is the name of a created variable
 ## Dependencies
