@@ -1,8 +1,6 @@
 use super::lexer::*;
-use serde::Deserialize;
-use std::{fs::File, io::Read};
 
-
+#[derive(Debug, PartialEq)]
 pub struct ASTNode{
     pub token: Token,
     pub linked_token: Vec<TokenKind>
