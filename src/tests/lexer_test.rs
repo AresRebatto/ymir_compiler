@@ -106,7 +106,7 @@ fn get_tokens_42_plus_x() {
 #[test]
 fn get_tokens_multiple_statements() {
 	let res = get_tokens(String::from("int x = 42; x + 1"));
-	assert_eq!(res, 
+	assert_eq!(res, [
 		Token{
 			token: TokenKind::Type(String::from("int")),
 			next_token: Some(TokenKind::Identifier(String::from("x")))
