@@ -25,6 +25,10 @@ impl Token{
 }
 
 pub fn get_tokens(source_code: String)-> Vec<Token>{
+	if source_code.is_empty(){
+		return vec![];
+	}
+	
 	let mut res: Vec<Token> = vec![];
 	let mut counter: usize = 0;
 	for _c in source_code.split(' ').into_iter(){
