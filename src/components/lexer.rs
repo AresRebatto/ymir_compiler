@@ -1,3 +1,5 @@
+use std::iter::Iterator;
+
 #[derive(Clone, Debug, PartialEq)]
 pub enum TokenKind{
 	Int(i32),
@@ -24,6 +26,11 @@ impl Token{
 	}
 }
 
+///Return the tokens based on the code source passed as a String \
+/// param:
+/// ```
+/// source_code: String
+/// ```
 pub fn get_tokens(source_code: String)-> Vec<Token>{
 	if source_code.is_empty(){
 		return vec![];
