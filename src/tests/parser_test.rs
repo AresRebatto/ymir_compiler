@@ -133,9 +133,9 @@ fn ast_test_int_variable() {
 
     assert_eq!(ast, [
         vec![
-            TokenKind::Identifier("".to_string()),
             TokenKind::Minus, 
-            TokenKind::Plus
+            TokenKind::Plus,
+            TokenKind::Semicolon
         ],
         vec![
             TokenKind::Minus, 
@@ -163,9 +163,9 @@ fn ast_test_variable_assignment() {
             TokenKind::Int(0)
         ],
         vec![
-            TokenKind::Identifier("".to_string()), 
             TokenKind::Minus, 
-            TokenKind::Plus
+            TokenKind::Plus,
+            TokenKind::Semicolon
         ]
     ]);
 }
@@ -201,19 +201,24 @@ fn ast_test_nested_expression() {
         .collect();
 
     assert_eq!(ast, [
-        vec![
-            TokenKind::Identifier("".to_string()), 
+        vec![ 
             TokenKind::Minus, 
-            TokenKind::Plus
+            TokenKind::Plus,
+            TokenKind::Semicolon
         ],
         vec![
             TokenKind::Int(0), 
             TokenKind::Identifier("".to_string())
         ],
         vec![
-            TokenKind::Int(0), 
-            TokenKind::Identifier("".to_string())
+			TokenKind::Minus, 
+			TokenKind::Plus,
+			TokenKind::Semicolon
         ],
+        vec![
+        	TokenKind::Int(0),
+        	TokenKind::Identifier("".to_string())
+       	],
         vec![
             TokenKind::Minus, 
             TokenKind::Plus, 
@@ -239,10 +244,10 @@ fn ast_test_semicolon_ending() {
             TokenKind::Identifier("".to_string()), 
             TokenKind::Int(0)
         ],
-        vec![
-            TokenKind::Identifier("".to_string()), 
+        vec![ 
             TokenKind::Minus, 
-            TokenKind::Plus
+            TokenKind::Plus,
+            TokenKind::Semicolon
         ],
         vec![]
     ]);
