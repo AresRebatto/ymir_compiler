@@ -67,3 +67,12 @@ fn get_token(word: &str)-> Option<TokenKind>{
 		}
 	}
 }
+
+impl TokenKind{
+	pub fn unwrap_id(&self)-> String{
+		match self{
+			TokenKind::Identifier(val)=> val.clone(),
+			_ => panic!("impossible to implicit convert")
+		}
+	}
+}
