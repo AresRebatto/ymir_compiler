@@ -1,4 +1,4 @@
 pub mod lexer;
 pub mod parser;
-pub mod syntax_analyzer;
+pub mod semantic_analyzer;
 

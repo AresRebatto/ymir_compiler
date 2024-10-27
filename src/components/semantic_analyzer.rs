@@ -24,7 +24,8 @@ pub fn is_code_valid(tokens: &Vec<Token>) -> bool{
     		_ => TokenKind::Identifier("null".to_string())
     	};
     	
-        if !get_ast(&token.token)
+        if !get_ast(&
+        token.token)
         	.unwrap()
         	.contains(&compare_value)
         	&& token.token != TokenKind::Semicolon{
@@ -34,3 +35,18 @@ pub fn is_code_valid(tokens: &Vec<Token>) -> bool{
     return true;
 
 }
+
+
+struct SAResult{
+	pub symbol_table: Option<SymbolTableRecord>,
+	pub is_code_valid: bool
+}
+
+struct SymbolTableRecord{
+	pub identifier: String,
+
+	//Per un linguaggio completo dovrebbe essere una 
+	//generics, ma noi gestiamo solo interi 
+	pub value: i32
+}
+
