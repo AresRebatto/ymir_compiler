@@ -1,12 +1,13 @@
 use super::{parser::*, lexer::*};
 
-
-struct SemanticAnalyzer{
+#[derive(Debug, PartialEq)]
+pub struct SemanticAnalyzer{
 	pub symbol_table: Vec<SymbolTableRecord>,
 	pub is_code_valid: bool
 }
 
-struct SymbolTableRecord{
+#[derive(Debug, PartialEq)]
+pub struct SymbolTableRecord{
 	pub identifier: String,
 
 	//We manage only integer 
@@ -15,7 +16,8 @@ struct SymbolTableRecord{
 
 impl SemanticAnalyzer{
 
-	/// Return if source code is valid \
+	/// Return if source code is valid an
+	/// the Symbol Table\
 	/// param:
 	/// ```
 	/// tokens: Vector of tokens in source code
@@ -30,9 +32,9 @@ impl SemanticAnalyzer{
 		};
 	for (i, token) in tokens[..tokens.len()-1].iter().enumerate()
 	    {
-	    	let mut compare_value: TokenKind = match &token.next_token{
-	    		Some(TokenKind::Int(i))=> TokenKind::Int(0), 
-	    		Some(TokenKind::Identifier(i)) => TokenKind::Identifier("".to_string()),
+	    	let compare_value: TokenKind = match &token.next_token{
+	    		Some(TokenKind::Int(_i))=> TokenKind::Int(0), 
+	    		Some(TokenKind::Identifier(_i)) => TokenKind::Identifier("".to_string()),
 	    		Some(value)=> value.clone(),
 	    		_ => TokenKind::Identifier("null".to_string())
 	    	};
@@ -49,15 +51,48 @@ impl SemanticAnalyzer{
 	        }
 
 	        match &token.token{
-	        	TokenKind::Identifier(value)=>{
+	        	TokenKind::Identifier(_value)=>{
+
 	        		if token.next_token == Some(TokenKind::Equal){
+
 	        			match &tokens[i+2].token{
-	        				TokenKind::Identifier(id)=>{},
+
+	        				TokenKind::Identifier(_id)=>{
+
+								let identifier = _id;
+
+								match &tokens[i+3].token {
+
+									TokenKind::Semicolon =>{
+
+										let index = res.symbol_table
+															  .iter()
+															  .position(|value| &value.identifier == identifier)
+															  .unwrap_or(panic!("{} doesn't exist", identifier));
+										
+										res.symbol_table.push(
+											SymbolTableRecord::new(
+												token.token.clone().unwrap_id(), 
+												res.symbol_table[index].value
+											)
+										);
+
+									},
+
+									TokenKind::Plus =>{},
+
+									TokenKind::Minus => {},
+
+									_ => panic!("incorrect assignment format")
+								}
+							},
 	        				TokenKind::Int(val) => {
+
 	        					res.symbol_table
 	        						.push(SymbolTableRecord::new(token.token.clone().unwrap_id(), val.clone()));
-	        				},
-	        				_ => panic!("Exit code 1: incorretc aassignment format")
+	        				
+							},
+	        				_ => panic!("incorretc assignment format")
 	        			}
 	        		}
 	        	},
